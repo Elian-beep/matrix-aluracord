@@ -1,37 +1,11 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
+import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-function GlobalStyle() { //Componente de estilização global
-    return (
-        <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */ 
-      html, body, #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */ 
-    `}</style>
-    );
-}
+
 
 function Titulo(props) {
-    console.log(props.children);
     const Tag = props.tag || 'h1'; //Pode ser qualquer tag, se passada pela props. Caso não tenha nada, vira um h1
     return (
         <>
@@ -61,11 +35,13 @@ function Titulo(props) {
 // export default HomePage
 
 export default function PaginaInicial() {
-    const username = 'peas';
+    // const username = 'Elian-beep';
+    const [username, setUsername] = React.useState('Elian-beep'); //Mudança de estado (valor) de uma variavel      <- Hook
+    //username: valor de atual. setUsername: função que muda o valor de username
+    const roteamento = useRouter();                                                                               //<- Hook
 
     return (
         <>
-            <GlobalStyle />
             <Box
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -92,6 +68,12 @@ export default function PaginaInicial() {
                     {/* Formulário */}
                     <Box
                         as="form"
+                        onSubmit={function (infosDoEvento) { //Se houver alguma submnissão no formulário
+                            infosDoEvento.preventDefault(); //As iformações do evento estão previnindo o default
+                            console.log('Alguém submeteu o form');
+                            roteamento.push('/chat'); //Direciona para uma nova rota
+                            // window.location.href = '/chat';
+                        }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                             width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -102,7 +84,27 @@ export default function PaginaInicial() {
                             {appConfig.name}
                         </Text>
 
+
+                        {/* <input 
+                            type="text"
+                            value={username}
+                            onChange={function handler(event){ //Modifica o necessário da tela a cada caracter digitado
+                                console.log('usuario digitou', event.target.value); //Se atualiza a cada mudança do campo, no caso, a cada caracter digitado no campo
+                                //Onde ta o valor? 
+                                const valor = event.target.value;
+                                //Trocar o valor da variavel (username), através do React
+                                setUsername(valor);
+                            }}
+                        /> */}
                         <TextField
+                            value={username}
+                            onChange={function handler(event) { //Modifica o necessário da tela a cada caracter digitado
+                                console.log('usuario digitou', event.target.value); //Se atualiza a cada mudança do campo, no caso, a cada caracter digitado no campo
+                                //Onde ta o valor? 
+                                const valor = event.target.value;
+                                //Trocar o valor da variavel (username), através do React
+                                setUsername(valor);
+                            }}
                             fullWidth
                             textFieldColors={{
                                 neutral: {
