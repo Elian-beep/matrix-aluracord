@@ -23,7 +23,7 @@ export default function ChatPage() {
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
             id: listaDeMensagens.length + 1,
-            de: 'Elian-beep',
+            de: 'hillpng',
             texto: novaMensagem,
         };
         //Plugar futuramente a chamada de um back-end
