@@ -3,6 +3,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
+import backgro from '../assets/wallpapers/wall-pixel.png';
+
 
 
 function Titulo(props) {
@@ -45,8 +47,8 @@ export default function PaginaInicial() {
             <Box
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: appConfig.theme.colors.primary[500],
-                    backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+                    backgroundColor: appConfig.theme.colors.oceanic[600],
+                    backgroundImage: `url(${backgro})`,
                     backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
                 }}
             >
@@ -121,9 +123,9 @@ export default function PaginaInicial() {
                             fullWidth
                             buttonColors={{
                                 contrastColor: appConfig.theme.colors.neutrals["000"],
-                                mainColor: appConfig.theme.colors.primary[500],
+                                mainColor: appConfig.theme.colors.oceanic[500],
                                 mainColorLight: appConfig.theme.colors.primary[400],
-                                mainColorStrong: appConfig.theme.colors.primary[600],
+                                mainColorStrong: appConfig.theme.colors.oceanic[700],
                             }}
                         />
                     </Box>
@@ -171,3 +173,9 @@ export default function PaginaInicial() {
         </>
     );
 }
+
+// fetch('https://api.github.com/users/Elian-beep').then(async (respostaDoServidor) => {
+//     const respostaEsperada = await respostaDoServidor.json();
+//     console.log(respostaEsperada);
+// })
+// Método para capturar informações de um servidor ou json online, válido para todo navegador web

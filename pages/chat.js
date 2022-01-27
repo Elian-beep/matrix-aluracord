@@ -1,11 +1,28 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
+import { createClient } from '@supabase/supabase-js';
 import React, { useState } from 'react';
 import appConfig from '../config.json';
+
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzI4ODQ2OSwiZXhwIjoxOTU4ODY0NDY5fQ.jNkZArHIbmC3rptCViO2fsuysLgEv13XwxX86Li08Vw';
+const SUPABASE_URL = 'https://kffpixcxmuxxyrwlzxks.supabase.co';
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 export default function ChatPage() {
     // Sua lógica vai aqui
     const [mensagem, setMensagem] = useState('');
     const [listaDeMensagens, setListaDeMensagens] = useState([]);
+
+    React.useEffect(() => { //Consultando as informações da tabela do BD
+        supabaseClient
+            .from('mensagens')
+            .select('*')
+            .order('id', { ascending: false })
+            .then(({ data }) => {
+                setListaDeMensagens(data);
+            });
+    }, []);
+
     /*
     Usuário
     -usuário digita no campo textarea
@@ -22,15 +39,24 @@ export default function ChatPage() {
 
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
+            // id: listaDeMensagens.length + 1,
             de: 'hillpng',
             texto: novaMensagem,
         };
+
         //Plugar futuramente a chamada de um back-end
-        setListaDeMensagens([
-            mensagem,            //Adicionando a nova mensagem antes de apagar
-            ...listaDeMensagens //Mantendo os intes ja existentes na lista
-        ]);
+        supabaseClient //Inserindo as mensagens digitadas no BD
+            .from('mensagens')
+            .insert([
+                // Tem que ser um objeto com os MESMOS CAMPOS que foram escritos no supabase
+                mensagem
+            ])
+            .then(({ data }) => {
+                setListaDeMensagens([
+                    data,            //Adicionando a nova mensagem antes de apagar
+                    ...listaDeMensagens //Mantendo os intes ja existentes na lista
+                ]);
+            });
         setMensagem('');
     }
     return (
@@ -138,7 +164,6 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log('MessageList', props);
     return (
         <Box
             tag="ul"
