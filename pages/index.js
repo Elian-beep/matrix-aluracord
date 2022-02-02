@@ -3,10 +3,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-import backgro from '../assets/wallpapers/wall-pixel.png';
-
-
-
 function Titulo(props) {
     const Tag = props.tag || 'h1'; //Pode ser qualquer tag, se passada pela props. Caso não tenha nada, vira um h1
     return (
@@ -38,7 +34,7 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
     // const username = 'Elian-beep';
-    const [username, setUsername] = React.useState('Elian-beep'); //Mudança de estado (valor) de uma variavel      <- Hook
+    const [username, setUsername] = React.useState(''); //Mudança de estado (valor) de uma variavel      <- Hook
     //username: valor de atual. setUsername: função que muda o valor de username
     const roteamento = useRouter();                                                                               //<- Hook
 
@@ -48,7 +44,7 @@ export default function PaginaInicial() {
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     backgroundColor: appConfig.theme.colors.oceanic[600],
-                    backgroundImage: `url(${backgro})`,
+                    backgroundImage: 'url(https://i.imgur.com/HJ4VJeN.jpg)',
                     backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
                 }}
             >
@@ -73,7 +69,7 @@ export default function PaginaInicial() {
                         onSubmit={function (infosDoEvento) { //Se houver alguma submnissão no formulário
                             infosDoEvento.preventDefault(); //As iformações do evento estão previnindo o default
                             console.log('Alguém submeteu o form');
-                            roteamento.push('/chat'); //Direciona para uma nova rota
+                            roteamento.push(`/chat?username=${username}`); //Direciona para uma nova rota
                             // window.location.href = '/chat';
                         }}
                         styleSheet={{
