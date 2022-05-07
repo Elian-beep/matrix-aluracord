@@ -1,10 +1,10 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
-
 import appConfig from '../config.json';
 
 function GlobalStyle() {
-  <style global jsx>{`
-    * {
+  return (
+    <style global jsx>{`
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -12,8 +12,6 @@ function GlobalStyle() {
       }
       body {
         font-family: 'Open Sans', sans-serif;
-        margin: 0;
-        padding: 0;
       }
       /* App fit Height */ 
       html, body, #__next {
@@ -29,6 +27,7 @@ function GlobalStyle() {
       }
       /* ./App fit Height */ 
     `}</style>
+  );
 }
 
 function Titulo(props) {
@@ -38,7 +37,7 @@ function Titulo(props) {
       <Tag>{props.children}</Tag>
       <style jsx>{`
             ${Tag} {
-                color: ${appConfig.theme.colors.neutrals['900']};
+                color: ${appConfig.theme.colors.neutrals['000']};
                 font-size: 24px;
                 font-weight: 600;
             }
@@ -46,6 +45,19 @@ function Titulo(props) {
     </>
   );
 }
+
+// Componente React
+// function HomePage() {
+//     // JSX
+//     return (
+//         <div>
+//             <GlobalStyle />
+//             <Titulo tag="h2">Boas vindas de volta!</Titulo>
+//             <h2>Discord - Alura Matrix</h2>
+//         </div>
+//     )
+// }
+// export default HomePage
 
 export default function PaginaInicial() {
   const username = 'elian-beep';
@@ -59,7 +71,6 @@ export default function PaginaInicial() {
           backgroundColor: appConfig.theme.colors.primary[500],
           backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
-          height: '100vh', width: '100%'
         }}
       >
         <Box
@@ -85,7 +96,7 @@ export default function PaginaInicial() {
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
             }}
           >
-            <Titulo>Boas vindas de volta!</Titulo>
+            <Titulo tag="h2">Boas vindas de volta!</Titulo>
             <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
             </Text>
@@ -157,15 +168,3 @@ export default function PaginaInicial() {
     </>
   );
 }
-
-//Componente React
-// function HomePage() {
-//     return (
-//         <div>
-//             <GlobalStyle />
-//             <Title tag="h2">Boas vindas de volta!</Title>
-//             <h2>Discord - Alura Matrix</h2>
-//         </div>
-//     );
-// }
-// export default HomePage;
