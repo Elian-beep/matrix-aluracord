@@ -1,6 +1,6 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
-import React from 'react';
-import { useRouter } from 'next/router'; 
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
 function Titulo(props) {
@@ -34,8 +34,30 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
   // const username = 'elian-beep';
-  const [username, setUsername] = React.useState('omariosouto');
+  const [username, setUsername] = React.useState('');
   const roteamente = useRouter();
+  const [itemsApi, setItemsApi] = React.useState([]);
+
+  // useEffect(() => {
+  //   let abortController = new AbortController();
+
+  //   function getGitHubAPI(){
+  //     fetch('https://api.github.com/users/Elian-beep')
+  //       .then(async res => {
+  //         if(!res.ok){
+  //           throw new Error(res.status);
+  //         }
+
+  //         var data = await res.json();
+  //         setItemsApi(data);
+  //       })
+  //       .catch(e => console.log(e));
+  //   }
+
+  //   getGitHubAPI();
+
+  //   return () => abortController.abort();
+  // }, []);
 
   return (
     <>
@@ -98,6 +120,7 @@ export default function PaginaInicial() {
               onChange={function (event) {
                 console.log('usuario digitou', event.target.value);
 
+                console.log('ta maior que 2');
                 // Onde ta o valor?
                 const valor = event.target.value;
                 // Trocar o valor da variavel

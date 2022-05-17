@@ -1,0 +1,3 @@
+DESAFIO 1;
+    Criar validação de imagem apaenas quando campo possuir mais de 2 caracteres
+    Customizar um pouco mais a home (adicionar mais informações do usuario buscado)
