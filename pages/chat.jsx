@@ -7,25 +7,39 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const SUPABASE_URL = 'https://rkzequzckfcpttkhsqqc.supabase.co';
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const dadosSupaBase = 
-
-supabaseClient.from('mensagens').select('*').then((dados) => {
-    console.log('Dados da consulta: ', dados);
-});
-
 export default function ChatPage() {
     // Sua lógica vai aqui
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
+    React.useEffect(() => {
+        supabaseClient.from('mensagens').select('*').order('id', { ascending: false }).then(({ data }) => {
+            console.log('Dados da consulta: ', data);
+            setListaDeMensagens(data);
+        });
+    }, []);
+
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length,
+            // id: listaDeMensagens.length,
             texto: novaMensagem,
             de: 'elian-beep',
         }
 
-        setListaDeMensagens([mensagem, ...listaDeMensagens]);
+        supabaseClient
+            .from('mensagens')
+            .insert([
+                // Tem que ser um objeto com os mesmo campos criados no SUPABASE 
+                mensagem
+            ])
+            .then(({ data }) => {
+                console.log(data);
+                setListaDeMensagens([
+                    data[0], ...listaDeMensagens
+                ]);
+            });
+
+        // setListaDeMensagens([mensagem, ...listaDeMensagens]);
         setMensagem('');
     }
 
