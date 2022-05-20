@@ -1,5 +1,4 @@
 .areaChat::-webkit-scrollbar {
     background: blue;
     width: 5px;
-    border-radius: 10px;
 }
