@@ -90,7 +90,7 @@ export default function PaginaInicial() {
             onSubmit={function (infosDoEvento) { //Sempre que houver uma submissão
               infosDoEvento.preventDefault(); //Vai previinir as ações caso não haja submissões
               console.log('Alguém submeteu o form');
-              roteamente.push('/chat');
+              roteamente.push(`/chat?username=${username}`);
             }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
