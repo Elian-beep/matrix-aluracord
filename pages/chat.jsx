@@ -6,13 +6,13 @@ import { createClient } from '@supabase/supabase-js'
 import { ButtonSendSticker } from '../src/components/ButtonSendSticker';
 
 // Como fazer AJAX: https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MDg2OTA3MywiZXhwIjoxOTU2NDQ1MDczfQ.343ibq7UYFPDdyfsfGmEqUma01RW7P7KC9U2MDAGSkI';
-const SUPABASE_URL = 'https://kysxypdmtxjlkdysdlas.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJremVxdXpja2ZjcHR0a2hzcXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTI4ODA4MjMsImV4cCI6MTk2ODQ1NjgyM30.IwEHM7vuBk6Sxj2BkmCvv0kECeOLNwXE00wLaIZvyjg';
+const SUPABASE_URL = 'https://rkzequzckfcpttkhsqqc.supabase.co';
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function escutaMensagensEmTempoReal(adicionaMensagem) {
     return supabaseClient
-        .from('mensagens')
+        .from('chat')
         .on('INSERT', (respostaLive) => {
             adicionaMensagem(respostaLive.new);
         })
@@ -27,7 +27,7 @@ export default function ChatPage() {
 
     React.useEffect(() => {
         supabaseClient
-            .from('mensagens')
+            .from('chat')
             .select('*')
             .order('id', { ascending: false })
             .then(({ data }) => {
@@ -57,7 +57,7 @@ export default function ChatPage() {
         return () => {
             subscription.unsubscribe();
         }
-    }, []);
+    });
 
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
@@ -67,7 +67,7 @@ export default function ChatPage() {
         };
 
         supabaseClient
-            .from('mensagens')
+            .from('chat')
             .insert([
                 // Tem que ser um objeto com os MESMOS CAMPOS que você escreveu no supabase
                 mensagem
