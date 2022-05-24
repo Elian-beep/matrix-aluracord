@@ -132,7 +132,13 @@ export default function ChatPage() {
                             }}
                         />
 
-                        <ButtonSendSticker />
+                        {/* CAllBack */}
+                        <ButtonSendSticker
+                            onStickerClick={(sticker) => {
+                                console.log('sticker salvo no banco');
+                                handleNovaMensagem(':sticker: ' + sticker);
+                            }}
+                        />
                     </Box>
                 </Box>
             </Box>
