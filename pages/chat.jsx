@@ -31,20 +31,10 @@ export default function ChatPage() {
             .select('*')
             .order('id', { ascending: false })
             .then(({ data }) => {
-                // console.log('Dados da consulta:', data);
                 setListaDeMensagens(data);
             });
 
         const subscription = escutaMensagensEmTempoReal((novaMensagem) => {
-            console.log('Nova mensagem:', novaMensagem);
-            console.log('listaDeMensagens:', listaDeMensagens);
-            // Quero reusar um valor de referencia (objeto/array) 
-            // Passar uma função pro setState
-
-            // setListaDeMensagens([
-            //     novaMensagem,
-            //     ...listaDeMensagens
-            // ])
             setListaDeMensagens((valorAtualDaLista) => {
                 console.log('valorAtualDaLista:', valorAtualDaLista);
                 return [
@@ -61,7 +51,6 @@ export default function ChatPage() {
 
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            // id: listaDeMensagens.length + 1,
             de: usuarioLogado,
             texto: novaMensagem,
         };
@@ -189,7 +178,6 @@ function Header() {
 }
 
 function MessageList(props) {
-    // console.log(props);
     return (
         <ul
             className='chatScroll'
@@ -249,11 +237,6 @@ function MessageList(props) {
                             : (
                                 mensagem.texto
                             )}
-                        {/* if mensagem de texto possui stickers:
-                           mostra a imagem
-                        else 
-                           mensagem.texto */}
-                        {/* {mensagem.texto} */}
                     </Text>
                 );
             })}

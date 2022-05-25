@@ -33,40 +33,15 @@ function Titulo(props) {
 // export default HomePage
 
 export default function PaginaInicial() {
-  // const username = 'elian-beep';
   const [username, setUsername] = React.useState('');
   const roteamente = useRouter();
-  const [itemsApi, setItemsApi] = React.useState([]);
   const [caminhoImg, setCaminhoImg] = React.useState('https://raw.githubusercontent.com/Elian-beep/assets-online/main/icons8-github-512.png');
-
-  // useEffect(() => {
-  //   let abortController = new AbortController();
-
-  //   function getGitHubAPI(){
-  //     fetch('https://api.github.com/users/Elian-beep')
-  //       .then(async res => {
-  //         if(!res.ok){
-  //           throw new Error(res.status);
-  //         }
-
-  //         var data = await res.json();
-  //         setItemsApi(data);
-  //       })
-  //       .catch(e => console.log(e));
-  //   }
-
-  //   getGitHubAPI();
-
-  //   return () => abortController.abort();
-  // }, []);
 
   useEffect(() => {
     if (username == '') {
       setCaminhoImg('https://raw.githubusercontent.com/Elian-beep/assets-online/main/icons8-github-512.png');
-      console.log('voltou para default');
     }else{
       setCaminhoImg(`https://github.com/${username}.png`);
-      console.log('mudou aaqui');
     }
   }, [username]);
 
@@ -112,19 +87,6 @@ export default function PaginaInicial() {
             <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
             </Text>
-
-            {/* <input 
-              type="text"
-              value={username}
-              onChange={function (event){
-                console.log('usuario digitou', event.target.value);
-
-                // Onde ta o valor?
-                const valor = event.target.value;
-                // Trocar o valor da variavel
-                setUsername(valor);
-              }}
-            /> */}
 
             <TextField
               value={username}
