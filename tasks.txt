@@ -3,7 +3,7 @@ AUTORAIS:
     [X] Customizar as barras de rolagens do chat
     [ ] Logar apenas com usuário github válido
     [X] Exibir uma imagem de default no index
-    [ ] Padronizar o tamanho dos gifs no chat
+    [X] Padronizar o tamanho dos gifs no chat
 
 DESAFIO 1:
     [ ] Customizar um pouco mais a home (adicionar mais informações do usuario buscado)

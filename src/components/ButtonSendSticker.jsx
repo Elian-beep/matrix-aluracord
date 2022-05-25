@@ -68,7 +68,7 @@ export function ButtonSendSticker(props) {
               justifyContent: 'space-between',
               flex: 1,
               paddingTop: '16px',
-              overflow: 'scroll',
+              overflowY: 'scroll',
             }}
           >
             {appConfig.stickers.map((sticker) => (
@@ -91,7 +91,9 @@ export function ButtonSendSticker(props) {
                   }
                 }}
               >
-                <Image src={sticker} />
+                <Image
+                  src={sticker}
+                />
               </Text>
             ))}
           </Box>
