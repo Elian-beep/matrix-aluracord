@@ -191,16 +191,8 @@ function Header() {
 function MessageList(props) {
     // console.log(props);
     return (
-        <Box
-            tag="ul"
-            styleSheet={{
-                overflow: 'scroll',
-                display: 'flex',
-                flexDirection: 'column-reverse',
-                flex: 1,
-                color: appConfig.theme.colors.neutrals["000"],
-                marginBottom: '16px',
-            }}
+        <ul
+            className='chatScroll'
         >
             {props.mensagens.map((mensagem) => {
                 return (
@@ -219,6 +211,8 @@ function MessageList(props) {
                         <Box
                             styleSheet={{
                                 marginBottom: '8px',
+                                display: 'flex',
+                                alignItems: 'center',
                             }}
                         >
                             <Image
@@ -238,6 +232,7 @@ function MessageList(props) {
                                 styleSheet={{
                                     fontSize: '10px',
                                     marginLeft: '8px',
+                                    marginBottom: '-2px',
                                     color: appConfig.theme.colors.neutrals[300],
                                 }}
                                 tag="span"
@@ -262,6 +257,6 @@ function MessageList(props) {
                     </Text>
                 );
             })}
-        </Box>
+        </ul>
     )
 }
