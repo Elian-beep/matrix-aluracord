@@ -37,6 +37,7 @@ export default function PaginaInicial() {
   const [username, setUsername] = React.useState('');
   const roteamente = useRouter();
   const [itemsApi, setItemsApi] = React.useState([]);
+  const [caminhoImg, setCaminhoImg] = React.useState('https://raw.githubusercontent.com/Elian-beep/assets-online/main/icons8-github-512.png');
 
   // useEffect(() => {
   //   let abortController = new AbortController();
@@ -58,6 +59,16 @@ export default function PaginaInicial() {
 
   //   return () => abortController.abort();
   // }, []);
+
+  useEffect(() => {
+    if (username == '') {
+      setCaminhoImg('https://raw.githubusercontent.com/Elian-beep/assets-online/main/icons8-github-512.png');
+      console.log('voltou para default');
+    }else{
+      setCaminhoImg(`https://github.com/${username}.png`);
+      console.log('mudou aaqui');
+    }
+  }, [username]);
 
   return (
     <>
@@ -118,12 +129,7 @@ export default function PaginaInicial() {
             <TextField
               value={username}
               onChange={function (event) {
-                console.log('usuario digitou', event.target.value);
-
-                console.log('ta maior que 2');
-                // Onde ta o valor?
                 const valor = event.target.value;
-                // Trocar o valor da variavel
                 setUsername(valor);
               }}
               fullWidth
@@ -172,7 +178,7 @@ export default function PaginaInicial() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
-              src={`https://github.com/${username}.png`}
+              src={caminhoImg}
             />
             <Text
               variant="body4"

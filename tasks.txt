@@ -1,7 +1,8 @@
 AUTORAIS:
     [X] REMODIFICAR PARA MEU MODELO DE PROJETO
-    [ ] Customizar as barras de rolagens do chat
+    [X] Customizar as barras de rolagens do chat
     [ ] Logar apenas com usuário github válido
+    [X] Exibir uma imagem de default no index
 
 DESAFIO 1:
     [ ] Customizar um pouco mais a home (adicionar mais informações do usuario buscado)
