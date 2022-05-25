@@ -135,7 +135,7 @@ export default function ChatPage() {
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
                             styleSheet={{
-                                width: '100%',
+                                width: '85%',
                                 border: '0',
                                 resize: 'none',
                                 borderRadius: '5px',
@@ -143,6 +143,26 @@ export default function ChatPage() {
                                 backgroundColor: appConfig.theme.colors.neutrals[800],
                                 marginRight: '12px',
                                 color: appConfig.theme.colors.neutrals[200],
+                            }}
+                        />
+
+                        <Button
+                            label='OK'
+                            onClick={(event) => {
+                                event.preventDefault();
+                                handleNovaMensagem(mensagem);
+                            }}
+                            styleSheet={{
+                                width: '15%',
+                                height: '90%',
+                                marginRight: '12px',
+                                marginBottom: '8px',
+                            }}
+                            buttonColors={{
+                                contrastColor: appConfig.theme.colors.neutrals["000"],
+                                mainColor: appConfig.theme.colors.primary[600],
+                                mainColorLight: appConfig.theme.colors.primary[800],
+                                mainColorStrong: appConfig.theme.colors.primary[900],
                             }}
                         />
                         {/* CallBack */}
