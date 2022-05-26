@@ -9,8 +9,8 @@ DESAFIO 1:
     [ ] Customizar um pouco mais a home (adicionar mais informações do usuario buscado)
 
 DESAFIO 2:
-    [ ] Adicionar um botão de ok ao lado do input
-    [ ] Botão para deletar a mensagem específica
+    [X] Adicionar um botão de ok ao lado do input
+    [ ] Botão para deletar a mensagem específica1
         (usar o filter, filtrar todos diferentes do id a ser deletado e atualizar a lista de mensagens)
 
 DESAFIO 3:

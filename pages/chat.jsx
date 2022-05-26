@@ -106,13 +106,6 @@ export default function ChatPage() {
                     }}
                 >
                     <MessageList mensagens={listaDeMensagens} />
-                    {/* {listaDeMensagens.map((mensagemAtual) => {
-                        return (
-                            <li key={mensagemAtual.id}>
-                                {mensagemAtual.de}: {mensagemAtual.texto}
-                            </li>
-                        )
-                    })} */}
                     <Box
                         as="form"
                         styleSheet={{
@@ -169,6 +162,7 @@ export default function ChatPage() {
                         <ButtonSendSticker
                             onStickerClick={(sticker) => {
                                 // console.log('[USANDO O COMPONENTE] Salva esse sticker no banco', sticker);
+                                console.log('Lista de mensagens: ', listaDeMensagens)
                                 handleNovaMensagem(':sticker: ' + sticker);
                             }}
                         />
@@ -198,6 +192,7 @@ function Header() {
 }
 
 function MessageList(props) {
+    const [idApagarMensagem, setIdApagarMensagem] = React.useState();
     return (
         <ul
             className='chatScroll'
@@ -213,40 +208,62 @@ function MessageList(props) {
                             marginBottom: '12px',
                             hover: {
                                 backgroundColor: appConfig.theme.colors.neutrals[700],
-                            }
+                            },
                         }}
                     >
                         <Box
                             styleSheet={{
-                                marginBottom: '8px',
                                 display: 'flex',
-                                alignItems: 'center',
+                                justifyContent: 'space-between',
                             }}
                         >
-                            <Image
+                            <Box
                                 styleSheet={{
-                                    width: '20px',
-                                    height: '20px',
-                                    borderRadius: '50%',
-                                    display: 'inline-block',
-                                    marginRight: '8px',
+                                    marginBottom: '8px',
+                                    display: 'flex',
+                                    alignItems: 'center',
                                 }}
-                                src={`https://github.com/${mensagem.de}.png`}
-                            />
-                            <Text tag="strong">
-                                {mensagem.de}
-                            </Text>
+                            >
+                                <Image
+                                    styleSheet={{
+                                        width: '20px',
+                                        height: '20px',
+                                        borderRadius: '50%',
+                                        display: 'inline-block',
+                                        marginRight: '8px',
+                                    }}
+                                    src={`https://github.com/${mensagem.de}.png`}
+                                />
+                                <Text tag="strong">
+                                    {mensagem.de}
+                                </Text>
+                                <Text
+                                    styleSheet={{
+                                        fontSize: '10px',
+                                        marginLeft: '8px',
+                                        marginBottom: '-2px',
+                                        color: appConfig.theme.colors.neutrals[300],
+                                    }}
+                                    tag="span"
+                                >
+                                    {(new Date().toLocaleDateString())}
+                                </Text>
+                            </Box>
+
                             <Text
                                 styleSheet={{
-                                    fontSize: '10px',
-                                    marginLeft: '8px',
-                                    marginBottom: '-2px',
-                                    color: appConfig.theme.colors.neutrals[300],
+                                    color: appConfig.theme.colors.neutrals[600],
+                                    width: '30px',
+                                    fontSize: '13pt',
+                                    cursor: 'pointer',
                                 }}
-                                tag="span"
-                            >
-                                {(new Date().toLocaleDateString())}
-                            </Text>
+                                onClick={() => {
+                                    console.log('apagar esta mensagem: ', mensagem.id);
+                                    console.log('Lista de mensagens: ', props.mensagens);
+                                    // setListaDeMensagens(listaDeMensagens.filter((item) => item.id != idMensagem));
+                                }}
+                            >X</Text>
+
                         </Box>
                         {/* [Declarativo] */}
                         {/* Condicional: {mensagem.texto.startsWith(':sticker:').toString()} */}
